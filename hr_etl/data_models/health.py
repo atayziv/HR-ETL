@@ -1,4 +1,4 @@
-from fastapi_server.data_models.base import SharedBaseModel
+from hr_etl.data_models.base import SharedBaseModel
 
 
 class HealthResponse(SharedBaseModel):

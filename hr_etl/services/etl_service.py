@@ -1,7 +1,7 @@
 import logging
 
-from fastapi_server.clients.examples_client import ExamplesClient
-from fastapi_server.data_models.example import ExampleRequest, ExampleResponse
+from hr_etl.clients.examples_client import ExamplesClient
+from hr_etl.data_models.example import ExampleRequest, ExampleResponse
 
 
 class ExamplesService:

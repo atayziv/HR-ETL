@@ -1,6 +1,6 @@
 import os
 
-from fastapi_server.constants import SETTINGS
+from hr_etl.constants import SETTINGS
 
 __all__ = ("SETTINGS",)
 

@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timezone
 
-from fastapi_server.data_models.base import SharedBaseModel
+from hr_etl.data_models.base import SharedBaseModel
 
 
 class ModelTest(SharedBaseModel):

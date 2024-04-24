@@ -1,6 +1,6 @@
 import pytest
 
-from fastapi_server.clients.examples_client import ExamplesClient
+from hr_etl.clients.examples_client import ExamplesClient
 
 
 @pytest.mark.parametrize(

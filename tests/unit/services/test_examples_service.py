@@ -2,8 +2,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from fastapi_server.data_models.example import ExampleRequest, ExampleResponse
-from fastapi_server.services.examples_service import ExamplesService
+from hr_etl.data_models.example import ExampleRequest, ExampleResponse
+from hr_etl.services.etl_service import ExamplesService
 
 
 @pytest.mark.parametrize(

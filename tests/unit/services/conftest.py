@@ -2,9 +2,9 @@ from unittest.mock import Mock
 
 import pytest
 
-from fastapi_server.clients.examples_client import ExamplesClient
-from fastapi_server.data_models.example import ExampleResponse
-from fastapi_server.services.examples_service import ExamplesService
+from hr_etl.clients.examples_client import ExamplesClient
+from hr_etl.data_models.example import ExampleResponse
+from hr_etl.services.etl_service import ExamplesService
 
 
 @pytest.fixture()
