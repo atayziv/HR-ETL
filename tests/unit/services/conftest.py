@@ -2,7 +2,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from hr_etl.clients.examples_client import ExamplesClient
+from hr_etl.clients.reader_client import ExamplesClient
 from hr_etl.data_models.example import ExampleResponse
 from hr_etl.services.etl_service import ExamplesService
 

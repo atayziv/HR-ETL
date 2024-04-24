@@ -1,21 +1,21 @@
 import logging
 
-from hr_etl.clients.examples_client import ExamplesClient
+from hr_etl.clients.reader_client import ReaderClient
 from hr_etl.data_models.example import ExampleRequest, ExampleResponse
 
 
-class ExamplesService:
+class ETLService:
     def __init__(
         self,
-        examples_client: ExamplesClient,
+        reader_client: ReaderClient,
+        json_input_path: str,
     ) -> None:
         self.__logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
-        self.__examples_client = examples_client
+        self.__reader_client = reader_client
+        self.__json_input_path = json_input_path
 
-    def get_extension_response(self, example_request: ExampleRequest) -> ExampleResponse:
-        self.__logger.debug("Getting extension response...")
-        result = self.__examples_client.get_extension(example_request.path)
-        return ExampleResponse(
-            path=example_request.path,
-            extension=result,
-        )
+    def extraction(self) -> None:
+        self.__logger.debug("Handle Json File...")
+        data = self.__reader_client(self.__json_input_path)
+        for employee_data in data:
+            

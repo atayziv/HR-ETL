@@ -13,3 +13,5 @@ logging:
     root:
         level: "DEBUG"
         handlers: ["console"]
+
+json_file_path: ${JSON_FILE_PATH:"../tests/test_data/Input_json_file.json"}
