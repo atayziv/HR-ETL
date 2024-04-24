@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+    fastapi-server:
+        build:
+            context: ../..
+            args:
+                ARTI_USERNAME: ${POETRY_HTTP_BASIC_ARTI_USERNAME}
+                ARTI_PASSWORD: ${POETRY_HTTP_BASIC_ARTI_PASSWORD}
+        ports:
+            - "5000"
