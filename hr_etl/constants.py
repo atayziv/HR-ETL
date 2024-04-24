@@ -8,5 +8,5 @@ def get_from_env(key: str, default_value: str) -> str:
 class SETTINGS:
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
     CONFIG = get_from_env("CONFIG", os.path.join(ROOT_DIR, "config.yaml"))
-    NAME = "EXTRACT, Transform And Load SERVICE"
+    NAME = "ETL SERVICE"
     VERSION = "0.1.0"

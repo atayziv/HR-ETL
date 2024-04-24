@@ -138,3 +138,8 @@ Configuration files of the project with Poetry.
 ### Assumes
 
 1. The input json file will be by the path to json file given into config.yaml file.
+2. If got the same employee_id , means its the same person in the list twice
+3. We don't want to insert emplyess with 'Unkown' depatrment to our DB.
+4. "Concatenate `first_name` and `last_name` into a new field called `full_name`" :
+   means NEW field , NOT INSTEAD.
+5. Same last comment for 'age'.

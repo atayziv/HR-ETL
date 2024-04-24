@@ -18,8 +18,8 @@ class Container(containers.DeclarativeContainer):
         ReaderClient,
     )
 
-    examples_service = providers.Singleton(
+    etl_service = providers.Singleton(
         ETLService,
         reader_client=reader_client,
-        json_input_path=config.json_input_path,
+        json_file_path=config.json_file_path,
     )
