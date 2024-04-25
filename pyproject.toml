@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "hr-erl"
+name = "hr-etl"
 version = "0.1.0"
 description = ""
 authors = ["atayziv <zivatay15@gmail.com>"]
 readme = "README.md"
-packages = [{include = "hr_erl"}]
+packages = [{include = "hr_etl"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
