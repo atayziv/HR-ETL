@@ -1,7 +1,3 @@
-# Node artifact files
-node_modules/
-dist/
-
 # Compiled Java class files
 *.class
 
@@ -32,28 +28,8 @@ Thumbs.db
 # VSCode IDE
 .vscode/
 
-# Applications
-*.app
-*.exe
-*.war
-
-# Large media files
-*.mp4
-*.tiff
-*.avi
-*.flv
-*.mov
-*.wmv
-
-# Tests coverage
-/.coverage
-htmlcov/
-
 # Python virtual environment folder
 venv/
-
-# Tox
-.tox/
 
 # Local environment variables file
 .env

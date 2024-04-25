@@ -9,10 +9,8 @@ from pymongo import MongoClient
 class MongoDBClient:
     def __init__(self, connection_string: str, db_name: str) -> None:
         self.__logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
-        self.__connection_string = connection_string
-        self.__db_name = db_name
-        self.__client = MongoClient(self.__connection_string)
-        self.__employees_collection = self.__client[self.__db_name]["employees"]
+        self.__client = MongoClient(connection_string)
+        self.__employees_collection = self.__client[db_name]["employees"]
 
     def load_data_to_mongo(self, transformed_data: List[Dict[str, str]]):
         self.__logger.debug(
