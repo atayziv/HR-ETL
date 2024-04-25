@@ -4,6 +4,9 @@ import os
 from datetime import datetime
 from typing import Dict
 
+import pymongo
+
+from hr_etl.clients.mongodb_client import MongoDBClient
 from hr_etl.clients.reader_client import ReaderClient
 
 
@@ -11,10 +14,12 @@ class ETLService:
     def __init__(
         self,
         reader_client: ReaderClient,
+        mongo_client: MongoDBClient,
         json_file_path: str,
     ) -> None:
         self.__logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
         self.__reader_client = reader_client
+        self.__mongo_client = mongo_client
         self.__result_json_data = []
         self.__unique_ids = set()
         self.extraction(json_file_path)
@@ -29,6 +34,13 @@ class ETLService:
                 employee_tranformed_data = self.transformation(employee_data)
                 if employee_tranformed_data is not None:
                     self.__result_json_data.append(employee_tranformed_data)
+            try:
+                self.__mongo_client.insert_mongo_data(self.__result_json_data)
+            except Exception as e:
+                self.__logger.error(
+                    f"An error occurred while inserting data into MongoDB: {e}"
+                )
+                raise
         except json.JSONDecodeError as error:
             self.__logger.exception(error)
             raise
