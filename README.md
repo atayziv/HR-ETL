@@ -66,6 +66,8 @@ python hr_etl
 \*\*If getting into troubles , try to 'cd' in terminal to HR-ETL , take the 'pwd' result,
 write the following command : export PYTHONPATH={pwd result}/HR-ETL
 then run the code from HR-ETL/hr_etl/**main**.py
+**The project has been tested and succeeded in both OS : macOS,Windows ,
+If getting any problem with 'dependency-injector' , I recommend to downgrade python to 3.9.6 version.
 
 ## Project's structure explained
 
