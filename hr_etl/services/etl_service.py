@@ -55,9 +55,8 @@ class ETLService:
             self.__mongo_client.load_data_to_mongo(
                 EmployeesStructure(employees_tranformed_data=self.__result_json_data)
             )
-            query = self.__build_query()
             query_results_data = self.__mongo_client.query_employees(
-                QueryStructure(query=query)
+                QueryStructure(query=Constants.QUERY)
             )
             self.__storage_client.save_file(
                 self.__employees_over_30_output_path, query_results_data
@@ -73,7 +72,7 @@ class ETLService:
         employee_id = employee_data.employee_id
         if (
             employee_id not in self.__unique_ids
-            and employee_data.department != Constants.invalid_department
+            and employee_data.department != Constants.INVALID_DEPARTMENT
         ):
             self.__logger.info(f"Start transformation on employee: {employee_id}")
             self.__unique_ids.add(employee_id)
@@ -96,8 +95,3 @@ class ETLService:
                 date_of_birth=employee_data.date_of_birth,
                 age=age,
             )
-
-    def __build_query(self):
-        operation = Query(operator="$gt", value=30)
-        query = {"age": {operation.operator: operation.value}}
-        return query

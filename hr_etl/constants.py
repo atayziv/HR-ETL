@@ -13,4 +13,5 @@ class SETTINGS:
 
 
 class Constants:
-    invalid_department = "Unknown"
+    INVALID_DEPARTMENT = "Unknown"
+    QUERY = {"age": {"$gt": 30}}
