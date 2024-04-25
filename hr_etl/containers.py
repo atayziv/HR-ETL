@@ -3,8 +3,9 @@ import logging.config
 from dependency_injector import containers, providers
 
 from hr_etl.clients import mongodb_client
+from hr_etl.clients.extractor_client import ReaderClient
 from hr_etl.clients.mongodb_client import MongoDBClient
-from hr_etl.clients.reader_client import ReaderClient
+from hr_etl.clients.storage_client import StorageClient
 from hr_etl.services.etl_service import ETLService
 
 from . import SETTINGS
@@ -22,8 +23,13 @@ class Container(containers.DeclarativeContainer):
         ReaderClient,
     )
 
+    storage_client = providers.Singleton(
+        StorageClient,
+    )
+
     mongo_client = providers.Resource(
         MongoDBClient,
+        storage_client=storage_client,
         connection_string=config.mongodb.connection_string,
         db_name=config.mongodb.db_name,
     )
@@ -33,4 +39,5 @@ class Container(containers.DeclarativeContainer):
         reader_client=reader_client,
         mongo_client=mongo_client,
         json_file_path=config.json_file_path,
+        employees_over_30_json_path=config.employees_over_30_json_path,
     )

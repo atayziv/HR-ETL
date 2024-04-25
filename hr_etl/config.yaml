@@ -13,7 +13,8 @@ logging:
     level: "DEBUG"
     handlers: [ "console" ]
 
-json_file_path: ${JSON_FILE_PATH:"../tests/test_data/Input_json_file.json"}
+json_file_path: "../tests/test_data/Input_json_file.json"
+employees_over_30_json_path: "../tests/test_data/employees_over_30_json_path.json"
 
 mongodb:
     connection_string: "mongodb+srv://mongo:mongo@employees.vkvskkk.mongodb.net/"

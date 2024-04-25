@@ -1,4 +1,4 @@
-""""Extraction Client."""
+""""Extractor Client."""
 
 import json
 from typing import Any

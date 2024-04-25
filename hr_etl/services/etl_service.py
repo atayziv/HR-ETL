@@ -4,8 +4,8 @@ import os
 from datetime import datetime
 from typing import Dict
 
+from hr_etl.clients.extractor_client import ReaderClient
 from hr_etl.clients.mongodb_client import MongoDBClient
-from hr_etl.clients.reader_client import ReaderClient
 
 
 class ETLService:
@@ -14,8 +14,10 @@ class ETLService:
         reader_client: ReaderClient,
         mongo_client: MongoDBClient,
         json_file_path: str,
+        employees_over_30_json_path: str,
     ) -> None:
         self.__logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
+        self.__employees_over_30_json_path = employees_over_30_json_path
         self.__reader_client = reader_client
         self.__mongo_client = mongo_client
         self.__result_json_data = []
@@ -39,7 +41,7 @@ class ETLService:
                     f"An error occurred while inserting data into MongoDB: {e}"
                 )
                 raise
-            self.__mongo_client.query_mongo()
+            self.__mongo_client.query_mongo(self.__employees_over_30_json_path)
         except json.JSONDecodeError as error:
             self.__logger.exception(error)
             raise

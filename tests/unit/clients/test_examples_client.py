@@ -1,6 +1,6 @@
 import pytest
 
-from hr_etl.clients.reader_client import ExamplesClient
+from hr_etl.clients.extractor_client import ExamplesClient
 
 
 @pytest.mark.parametrize(
