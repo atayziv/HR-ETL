@@ -39,6 +39,7 @@ class ETLService:
                     f"An error occurred while inserting data into MongoDB: {e}"
                 )
                 raise
+            self.__mongo_client.query_mongo()
         except json.JSONDecodeError as error:
             self.__logger.exception(error)
             raise
