@@ -63,16 +63,9 @@ The following command runs the app in the development mode (don't forget to run 
 python hr_etl
 ```
 
-After that, the server will be available on port 8000 of the local machine.
-
-### Run tests
-
-The following command runs all the app's tests, linters and security checks (don't forget to run it in the virtual
-environment):
-
-```sh
-tox
-```
+\*\*If getting into troubles , try to 'cd' in terminal to HR-ETL , take the 'pwd' result,
+write the following command : export PYTHONPATH={pwd result}/HR-ETL
+then run the code from HR-ETL/hr_etl/**main**.py
 
 ## Project's structure explained
 
@@ -110,18 +103,9 @@ Contains all the source code files, written in Python files (`*.py`).
 - `constants.py`: The app's main constant settings.
 - `containers.py`: All the dependencies that should be injected to the app.
 
-### `tests`
-
-Contains all the tests code files, written in Python files (`*.py`), with the pytest framework. For more information,
-please check [pytest's documentation](https://docs.pytest.org/).
-
 #### `test_data`
 
 Contains all the files needed for the tests.
-
-#### `unit`
-
-Contains all the unit tests, arranged in folders corresponding to the source code's hierarchy.
 
 ### `README.md`
 
@@ -135,12 +119,12 @@ Configuration files of the project with Poetry.
 
 `poetry.lock` is auto-generated and should be committed. It should not be modified manually.
 
-### Assumes
+### Assumptions
 
-1. The input json file will be by the path to json file given into config.yaml file.
-2. If got the same employee_id , means its the same person in the list twice
-3. We don't want to insert emplyess with 'Unkown' depatrment to our DB.
-4. "Concatenate `first_name` and `last_name` into a new field called `full_name`" :
-   means NEW field , NOT INSTEAD.
-5. Same last comment for 'age'.
-6. The client has to put his MongoDB 'connection_string' , change the default one in config file.
+1. The path to the input JSON file is specified in the `config.yaml` file.
+2. Duplicate `employee_id` values indicate that the same person appears in the list more than once.
+3. Employees with the department listed as 'Unknown' should not be inserted into the database.
+4. Concatenating `first_name` and `last_name` into a new field called `full_name` is to create a new field, not to replace any existing field.
+5. Similarly, the `age` field should be a new addition and not a replacement of any existing data.
+6. The MongoDB connection string provided in the config file is a placeholder, and clients should replace it with their specific connection string.
+7. The output JSON file path is also configured in the same way as the input JSON file path.

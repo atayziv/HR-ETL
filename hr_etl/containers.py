@@ -2,13 +2,10 @@ import logging.config
 
 from dependency_injector import containers, providers
 
-from hr_etl.clients import mongodb_client
 from hr_etl.clients.extractor_client import ReaderClient
 from hr_etl.clients.mongodb_client import MongoDBClient
 from hr_etl.clients.storage_client import StorageClient
 from hr_etl.services.etl_service import ETLService
-
-from . import SETTINGS
 
 
 class Container(containers.DeclarativeContainer):
