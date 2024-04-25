@@ -3,13 +3,15 @@
 import logging
 from typing import Dict, List
 
+from bson.json_util import dumps
 from pymongo import MongoClient
 
 from hr_etl.clients.storage_client import StorageClient
-from bson.json_util import dumps
 
 
 class MongoDBClient:
+    """MongoDB Client Class."""
+
     def __init__(
         self,
         storage_client: StorageClient,
