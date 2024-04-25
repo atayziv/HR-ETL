@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 from datetime import datetime
@@ -22,11 +23,15 @@ class ETLService:
         self.__logger.debug(
             f"Extract Data From Input Json File: {os.path.basename(json_file_path)}"
         )
-        data = self.__reader_client._read_data(json_file_path)
-        for employee_data in data:
-            employee_tranformed_data = self.transformation(employee_data)
-            if employee_tranformed_data is not None:
-                self.__result_json_data.append(employee_tranformed_data)
+        try:
+            data = self.__reader_client._read_data(json_file_path)
+            for employee_data in data:
+                employee_tranformed_data = self.transformation(employee_data)
+                if employee_tranformed_data is not None:
+                    self.__result_json_data.append(employee_tranformed_data)
+        except json.JSONDecodeError as error:
+            self.__logger.exception(error)
+            raise
 
     def transformation(self, employee_data: Dict[str, str]) -> Dict[str, str]:
         employee_id = employee_data["employee_id"]

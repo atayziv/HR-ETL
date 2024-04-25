@@ -10,3 +10,5 @@ class SETTINGS:
     CONFIG = get_from_env("CONFIG", os.path.join(ROOT_DIR, "config.yaml"))
     NAME = "ETL SERVICE"
     VERSION = "0.1.0"
+    ETL_MONGODB_ALIAS = "employees"
+
