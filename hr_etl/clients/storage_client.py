@@ -6,8 +6,6 @@ import os
 from pathlib import Path
 from typing import Dict, List
 
-from bson.json_util import dumps
-
 
 class StorageClient:
     """Store The System Output."""
@@ -19,7 +17,7 @@ class StorageClient:
         try:
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
             with open(file_path, "w") as json_file:
-                json.dump(data, json_file, indent=4)
+                json_file.write(data)
             self.__logger.info(f"Saved data to {file_path}")
         except Exception as e:
             self.__logger.error(f"Failed to save data to {file_path}: {e}")
