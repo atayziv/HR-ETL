@@ -12,7 +12,7 @@ class MongoDBClient:
         self.__connection_string = connection_string
         self.__db_name = db_name
 
-    def insert_mongo_data(self, transformed_data: List[Dict[str, str]]):
+    def load_data_to_mongo(self, transformed_data: List[Dict[str, str]]):
         self.__logger.debug(
             "Inserting Transfomed Data Into MongoDB 'employees' Collection"
         )

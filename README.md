@@ -143,3 +143,4 @@ Configuration files of the project with Poetry.
 4. "Concatenate `first_name` and `last_name` into a new field called `full_name`" :
    means NEW field , NOT INSTEAD.
 5. Same last comment for 'age'.
+6. The client has to put his MongoDB 'connection_string' , change the default one in config file.
