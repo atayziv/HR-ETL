@@ -11,3 +11,6 @@ class SETTINGS:
     NAME = "ETL SERVICE"
     ETL_MONGODB_ALIAS = "employees"
 
+
+class Constants:
+    invalid_department = "Unknown"

@@ -6,6 +6,9 @@ from typing import Any, Dict, List
 from bson import json_util
 from pymongo import MongoClient
 
+from hr_etl.data_models.employee import EmployeesStructure, TransformedEmployee
+from hr_etl.data_models.query import QueryStructure
+
 
 class MongoDBClient:
     """MongoDB Client Class."""
@@ -20,17 +23,19 @@ class MongoDBClient:
         self.__employees_collection = self.__client[db_name]["employees"]
         self.__employees_collection.create_index("employee_id", unique=True)
 
-    def load_data_to_mongo(self, transformed_data: List[Dict[str, str]]):
+    def load_data_to_mongo(self, transformed_data: EmployeesStructure):
         self.__logger.info(
             "Inserting transformed data into the 'employees' collection in MongoDB."
         )
-        self.__employees_collection.insert_many(transformed_data)
+        self.__employees_collection.insert_many(
+            transformed_data.employees_tranformed_data
+        )
         self.__logger.info(
             "Data has been successfully inserted into the 'employees' collection."
         )
 
-    def query_employees(self, query: Dict[str, Dict[str, Any]]) -> List[Dict[str, str]]:
+    def query_employees(self, query: QueryStructure) -> EmployeesStructure:
         self.__logger.info("Querying MongoDB for all employees over the age of 30.")
-        results = self.__employees_collection.find(query)
+        results = self.__employees_collection.find(query.query)
         self.__logger.info("Query completed successfully.")
         return json_util.dumps(results)
