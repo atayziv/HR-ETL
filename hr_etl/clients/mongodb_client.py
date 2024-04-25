@@ -1,7 +1,6 @@
 """MongoDB client."""
 
 import logging
-from typing import Any, Dict, List
 
 from bson import json_util
 from pymongo import MongoClient
