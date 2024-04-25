@@ -14,7 +14,7 @@ from hr_etl.data_models.employee import (
     EmployeesStructure,
     TransformedEmployee,
 )
-from hr_etl.data_models.query import Query, QueryStructure
+from hr_etl.data_models.query import QueryStructure
 
 
 class ETLService:
