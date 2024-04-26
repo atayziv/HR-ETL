@@ -9,11 +9,7 @@ from hr_etl.clients.extractor_client import ExtractorClient
 from hr_etl.clients.mongodb_client import MongoDBClient
 from hr_etl.clients.storage_client import StorageClient
 from hr_etl.constants import Constants
-from hr_etl.data_models.employee import (
-    Employee,
-    EmployeesStructure,
-    TransformedEmployee,
-)
+from hr_etl.data_models.employee import Employee, TransformedEmployee
 from hr_etl.data_models.query import QueryStructure
 
 
@@ -47,14 +43,10 @@ class ETLService:
             )
             for employee_data in employees_data:
                 employee = Employee(**employee_data)
-                employee_tranformed_data = self.transform_employee_data(employee)
-                if employee_tranformed_data:
-                    self.__result_json_data.append(
-                        employee_tranformed_data.model_dump()
-                    )
-            self.__mongo_client.load_data_to_mongo(
-                EmployeesStructure(employees_tranformed_data=self.__result_json_data)
-            )
+                transformed_employee = self.transform_employee_data(employee)
+                if transformed_employee:
+                    self.__result_json_data.append(transformed_employee)
+            self.__mongo_client.load_data_to_mongo(self.__result_json_data)
             query_results_data = self.__mongo_client.query_employees(
                 QueryStructure(query=Constants.QUERY)
             )

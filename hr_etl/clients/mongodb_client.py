@@ -1,11 +1,11 @@
 """MongoDB client."""
 
 import logging
+from typing import List
 
-from bson import json_util
-from pymongo import MongoClient
+from mongoengine import connect
 
-from hr_etl.data_models.employee import EmployeesStructure, TransformedEmployee
+from hr_etl.data_models.employee import TransformedEmployee
 from hr_etl.data_models.query import QueryStructure
 
 
@@ -18,23 +18,19 @@ class MongoDBClient:
         db_name: str,
     ) -> None:
         self.__logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
-        self.__client = MongoClient(connection_string)
-        self.__employees_collection = self.__client[db_name]["employees"]
-        self.__employees_collection.create_index("employee_id", unique=True)
+        connect(db_name, host=connection_string)
 
-    def load_data_to_mongo(self, transformed_data: EmployeesStructure):
+    def load_data_to_mongo(self, transformed_data: List[TransformedEmployee]):
         self.__logger.info(
             "Inserting transformed data into the 'employees' collection in MongoDB."
         )
-        self.__employees_collection.insert_many(
-            transformed_data.employees_tranformed_data
-        )
+        TransformedEmployee.objects.insert(transformed_data, load_bulk=False)
         self.__logger.info(
             "Data has been successfully inserted into the 'employees' collection."
         )
 
-    def query_employees(self, query: QueryStructure) -> EmployeesStructure:
+    def query_employees(self, query: QueryStructure) -> List[TransformedEmployee]:
         self.__logger.info("Querying MongoDB for all employees over the age of 30.")
-        results = self.__employees_collection.find(query.query)
+        results = TransformedEmployee.objects(__raw__=query.query)
         self.__logger.info("Query completed successfully.")
-        return json_util.dumps(results)
+        return results.to_json()
